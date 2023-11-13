@@ -5,6 +5,8 @@ public class TestingMain {
 
         int a;
         int b;
+        int c;
+        int d;
         Calculator calculator = new Calculator();
         int resultAdd = calculator.add(10, 22);
         int resultSubstract = calculator.substract(44, 22);
