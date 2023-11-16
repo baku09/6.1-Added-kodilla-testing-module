@@ -18,7 +18,7 @@ public class ForumStatisticsTestSuite {
 
     @Test
     void testCalculateAdvStatisticsWithZeroPosts() {
-        // Given
+        // Givenn
         when(statisticsMock.postsCount()).thenReturn(0);
         // When
         forumStatistics.calculateAdvStatistics(statisticsMock);
