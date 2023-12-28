@@ -11,21 +11,22 @@ public class CalculatorTestSuite {
 
     @Autowired
     private Calculator calculator;
+    private Display display;
 
     @Test
     public void testCalculator(){
         //Given
-        double a = 8;
-        double b = 4;
+        double a = 10;
+        double b = 5;
         //When
-        calculator.add(a, b);
-        calculator.sub(a, b);
-        calculator.mul(a, b);
-        calculator.div(a, b);
+        double addResult = calculator.add(a, b);
+        double subResult = calculator.sub(a, b);
+        double mulResult = calculator.mul(a, b);
+        double divResult = calculator.div(a, b);
         //Then
-        assertEquals(12.0 , a + b);
-        assertEquals(4.0 , a - b);
-        assertEquals(32.0 , a * b);
-        assertEquals(2.0 , a / b);
+        assertEquals(15.0, addResult, 0.01);
+        assertEquals(5.0, subResult, 0.01);
+        assertEquals(50.0, mulResult, 0.01);
+        assertEquals(2.0, divResult, 0.01);
     }
 }
