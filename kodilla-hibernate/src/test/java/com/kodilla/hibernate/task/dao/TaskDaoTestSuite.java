@@ -14,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class TaskDaoTestSuite {
 
     @Autowired
-    private TaskDao taskDao;
+    TaskDao taskDao;
     private static final String DESCRIPTION = "Test: Learn Hibernate";
 
     @Test
@@ -33,6 +33,7 @@ public class TaskDaoTestSuite {
         //CleanUp
         taskDao.deleteById(id);
     }
+
     @Test
     void testTaskDaoFindByDuration() {
         //Given
@@ -46,8 +47,6 @@ public class TaskDaoTestSuite {
         //Then
         assertEquals(1, readTasks.size());
 
-        //CleanUp
-        //int id = readTasks.get(0).getId();
-        //taskDao.deleteById(id);
+
     }
 }
