@@ -1,5 +1,6 @@
 package com.kodilla.hibernate.task;
 
+import com.kodilla.hibernate.tasklist.TaskList;
 import com.sun.istack.NotNull;
 
 import javax.persistence.*;
