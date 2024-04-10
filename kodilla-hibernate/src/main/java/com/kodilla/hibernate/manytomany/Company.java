@@ -5,7 +5,11 @@ import com.sun.istack.NotNull;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
-
+@NamedNativeQuery(
+        name = "Company.findByNameStartingWith",
+        query = "SELECT * FROM COMPANIES WHERE LEFT(COMPANY_NAME, 3) = :name",
+        resultClass = Company.class
+)
 @Entity
 @Table(name = "COMPANIES")
 public class Company {
