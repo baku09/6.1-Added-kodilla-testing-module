@@ -1,6 +1,5 @@
 package com.kodilla.hibernate.task.dao;
 
-import com.kodilla.hibernate.task.Task;
 import com.kodilla.hibernate.task.TaskFinancialDetails;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -11,9 +10,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import java.math.BigDecimal;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
-
-
+import static junit.framework.TestCase.assertEquals;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
@@ -21,7 +18,6 @@ class TaskFinancialDetailsDaoTestSuite {
 
     @Autowired
     private TaskFinancialDetailsDao taskFinancialDetailsDao;
-    private static final String DESCRIPTION = "Test: Learn Hibernate";
 
     @Test
     void testFindByPaid() {
@@ -35,7 +31,7 @@ class TaskFinancialDetailsDaoTestSuite {
         List<TaskFinancialDetails> resultList = taskFinancialDetailsDao.findByPaid(false);
 
         //Then
-        assertEquals(7, resultList.size());
+        assertEquals(1, resultList.size());
 
         //CleanUp
         taskFinancialDetailsDao.deleteById(id);

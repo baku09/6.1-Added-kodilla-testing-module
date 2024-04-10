@@ -14,12 +14,6 @@ public class Company {
     private String name;
     private List<Employee> employees = new ArrayList<>();
 
-    public Company() {
-    }
-
-    public Company(String name) {
-        this.name = name;
-    }
     @ManyToMany(cascade = CascadeType.ALL, mappedBy = "companies")
     public List<Employee> getEmployees() {
         return employees;
@@ -27,6 +21,13 @@ public class Company {
 
     private void setEmployees(List<Employee> employees) {
         this.employees = employees;
+    }
+
+    public Company() {
+    }
+
+    public Company(String name) {
+        this.name = name;
     }
 
     @Id

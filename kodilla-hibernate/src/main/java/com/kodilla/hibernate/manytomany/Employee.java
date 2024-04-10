@@ -9,18 +9,11 @@ import java.util.List;
 @Entity
 @Table(name = "EMPLOYEES")
 public class Employee {
+
     private int id;
     private String firstname;
     private String lastname;
     private List<Company> companies = new ArrayList<>();
-
-    public Employee() {
-    }
-
-    public Employee(String firstname, String lastname) {
-        this.firstname = firstname;
-        this.lastname = lastname;
-    }
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
             name = "JOIN_COMPANY_EMPLOYEE",
@@ -33,6 +26,14 @@ public class Employee {
 
     private void setCompanies(List<Company> companies) {
         this.companies = companies;
+    }
+
+    public Employee() {
+    }
+
+    public Employee(String firstname, String lastname) {
+        this.firstname = firstname;
+        this.lastname = lastname;
     }
 
     @Id
@@ -66,5 +67,4 @@ public class Employee {
     private void setLastname(String lastname) {
         this.lastname = lastname;
     }
-
 }
