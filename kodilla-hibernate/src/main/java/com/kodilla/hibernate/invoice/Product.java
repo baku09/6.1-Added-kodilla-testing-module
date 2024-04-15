@@ -6,17 +6,10 @@ import javax.persistence.*;
 
 
 @Entity
-@Table(name = "PRODUCTS")
+@Table(name = "PRODUCT")
 public class Product {
 
-    @Id
-    @GeneratedValue
-    @NotNull
-    @Column(name = "ID", unique = true)
     private int id;
-
-    @NotNull
-    @Column(name = "NAME")
     private String name;
 
     public Product() {
@@ -26,19 +19,25 @@ public class Product {
         this.name = name;
     }
 
+    @Id
+    @GeneratedValue
+    @NotNull
+    @Column(name = "ID", unique = true)
     public int getId() {
         return id;
     }
 
+    @NotNull
+    @Column(name = "NAME")
     public String getName() {
         return name;
     }
 
-    @Override
-    public String toString() {
-        return "Product{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                '}';
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    private void setName(String name) {
+        this.name = name;
     }
 }

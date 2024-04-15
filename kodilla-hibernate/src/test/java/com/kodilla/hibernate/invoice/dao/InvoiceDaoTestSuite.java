@@ -3,14 +3,14 @@ package com.kodilla.hibernate.invoice.dao;
 import com.kodilla.hibernate.invoice.Invoice;
 import com.kodilla.hibernate.invoice.Item;
 import com.kodilla.hibernate.invoice.Product;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.math.BigDecimal;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+
+import static junit.framework.TestCase.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 
 @SpringBootTest
 class InvoiceDaoTestSuite {
@@ -18,52 +18,41 @@ class InvoiceDaoTestSuite {
     @Autowired
     private InvoiceDao invoiceDao;
 
-    @Autowired
-    private ItemDao itemDao;
-
-    @Autowired
-    private ProductDao productDao;
-
-    private Product product1;
-    private Product product2;
-    private Item item1;
-    private Item item2;
-    private Invoice invoice;
-
-    @BeforeEach
-    void setUp() {
-        product1 = new Product("Product1");
-        product2 = new Product("Product2");
-
-        item1 = new Item(product1, new BigDecimal("100"), 2);
-        item2 = new Item(product2, new BigDecimal("50"), 3);
-
-        invoice = new Invoice("FV1");
-        invoice.addItems(item1);
-        invoice.addItems(item2);
-    }
-
-    @AfterEach
-    void tearDown() {
-        invoiceDao.deleteAll();
-        itemDao.deleteAll();
-        productDao.deleteAll();
-    }
-
     @Test
     void testInvoiceDaoSave() {
-        // Given
-        productDao.save(product1);
-        productDao.save(product2);
+        //Given
+        Product product1 = new Product("Potato");
+        Product product2 = new Product("Tomato");
 
-        // When
+        Item item1 = new Item(new BigDecimal(5), 10, new BigDecimal(50));
+        Item item2 = new Item(new BigDecimal(15), 10, new BigDecimal(150));
+        Item item3 = new Item(new BigDecimal(100), 7, new BigDecimal(700));
+
+        item1.setProduct(product1);
+        item2.setProduct(product1);
+        item3.setProduct(product2);
+
+        Invoice invoice = new Invoice("123456");
+        invoice.getItems().add(item1);
+        invoice.getItems().add(item2);
+        invoice.getItems().add(item3);
+
+        //When
         invoiceDao.save(invoice);
-        int invoiceId = invoice.getId();
+        int id = invoice.getId();
+        int itemsSize = invoice.getItems().size();
+        int itemId = invoice.getItems().get(0).getId();
 
-        // Then
-        assertNotNull(invoiceId);
+        //Then
+        assertEquals(3, itemsSize);
+        assertNotEquals(0, id);
+        assertNotEquals(0, itemId);
 
-        // CleanUp
-        invoiceDao.deleteById(invoiceId);
+        try {
+            //CleanUp
+            invoiceDao.deleteById(id);
+        } catch (Exception e) {
+            //do nothing
+        }
     }
 }

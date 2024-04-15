@@ -7,24 +7,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "INVOICES")
+@Table(name = "INVOICE")
 public class Invoice {
 
-    @Id
-    @GeneratedValue
-    @NotNull
-    @Column(name = "ID", unique = true)
     private int id;
-
-    @Column(name = "NUMBER")
     private String number;
-
-    @OneToMany(
-            targetEntity = Item.class,
-            mappedBy = "invoice",
-            cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY
-    )
     private List<Item> items = new ArrayList<>();
 
     public Invoice() {
@@ -34,29 +21,39 @@ public class Invoice {
         this.number = number;
     }
 
+    @Id
+    @GeneratedValue
+    @NotNull
+    @Column(name = "ID", unique = true)
     public int getId() {
         return id;
     }
 
+    @NotNull
+    @Column(name = "NUMBER")
     public String getNumber() {
         return number;
     }
 
+    @OneToMany(
+            targetEntity = Item.class,
+            cascade = CascadeType.ALL,
+            fetch = FetchType.EAGER
+    )
+    @JoinColumn(name = "INVOICE_ID")
     public List<Item> getItems() {
         return items;
     }
 
-    public void addItems(Item item) {
-        items.add(item);
-        item.setInvoice(this);
+    private void setId(int id) {
+        this.id = id;
     }
 
-    @Override
-    public String toString() {
-        return "Invoice{" +
-                "id=" + id +
-                ", number='" + number + '\'' +
-                ", items=" + items +
-                '}';
+    private void setNumber(String number) {
+        this.number = number;
+    }
+
+    private void setItems(List<Item> items) {
+        this.items = items;
     }
 }
