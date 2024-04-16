@@ -48,6 +48,24 @@ class InvoiceDaoTestSuite {
         assertNotEquals(0, id);
         assertNotEquals(0, itemId);
 
+        var item1FromInvoice = invoice.getItems().get(0);
+        assertEquals(item1FromInvoice.getProduct(), product1);
+        assertEquals(item1FromInvoice.getPrice(), new BigDecimal(5));
+        assertEquals(item1FromInvoice.getQuantity(), 10);
+        assertEquals(item1FromInvoice.getValue(), new BigDecimal(50));
+
+        var item2FromInvoice = invoice.getItems().get(1);
+        assertEquals(item2FromInvoice.getProduct(), product1);
+        assertEquals(item2FromInvoice.getPrice(), new BigDecimal(15));
+        assertEquals(item2FromInvoice.getQuantity(), 10);
+        assertEquals(item2FromInvoice.getValue(), new BigDecimal(150));
+
+        var item3FromInvoice = invoice.getItems().get(2);
+        assertEquals(item3FromInvoice.getProduct(), product2);
+        assertEquals(item3FromInvoice.getPrice(), new BigDecimal(100));
+        assertEquals(item3FromInvoice.getQuantity(), 7);
+        assertEquals(item3FromInvoice.getValue(), new BigDecimal(700));
+
         try {
             //CleanUp
             invoiceDao.deleteById(id);
